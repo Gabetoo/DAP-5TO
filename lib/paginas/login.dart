@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:log_in/elementos/Mi_TextField';
+import 'package:log_in/elementos/mi_textfield.dart';
 
 class Login extends StatelessWidget {
   Login({super.key});
-  final usernameController = TextEditingController();
-  final passwordController = TextEditingController();
+  // guardo las credenciales
+  final usuarioController = TextEditingController();
+  final contrasenaController = TextEditingController();
 
 
   @override
@@ -34,12 +35,18 @@ class Login extends StatelessWidget {
             SizedBox(height: 20),
 
             MiTextField(
-            controller: usuarioController,
-            hintText: 'Usuario',
-            obscureText: false,
-            ),
+              controller: usuarioController,
+              hintText: 'Usuario',
+              obscureText: false,
+              ),
 
             SizedBox(height: 10),
+
+            MiTextField(
+              controller: contrasenaController,
+              hintText: 'Contraseña',
+              obscureText: true,
+              ),
 
           ],
           ),
