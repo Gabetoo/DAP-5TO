@@ -1,46 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:log_in/elementos/miboton.dart';
+import 'package:go_router/go_router.dart';
+import 'package:log_in/pantallas/home.dart';
 
 class Login extends StatelessWidget {
-  const Login({super.key});
-
-  void loginearUsuario() {}
+  static const String name = 'login';
+  Login({super.key});
+  final TextEditingController usuarioController = TextEditingController();
+  final TextEditingController contrasenaController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Color.fromRGBO(150, 150, 150, 1),
+    return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 190, 190, 190),
       body: SafeArea(
         child: Center(
           child: Column(
             children: [
-              SizedBox(height: 50), //Sirve para dejar espacios
-              Icon(
+              const SizedBox(height: 50), //Sirve para dejar espacios
+              const Icon(
                 Icons.phone_iphone,
                 size: 125,
-                color: Color.fromRGBO(255, 255, 255, 1),
+                color: Color.fromRGBO(0, 0, 0, 1),
               ),
-              SizedBox(height: 50),
+              const SizedBox(height: 50),
 
-              Text(
+              const Text(
                 //Texto de bienvenida
                 '¡Bienvenido de vuelta!',
                 style: TextStyle(
-                  color: Color.fromRGBO(250, 250, 250, 1),
+                  color: Color.fromRGBO(0, 0, 0, 1),
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),
 
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               Padding(
                 //Bloque de texto de contraseña
-                padding: EdgeInsets.symmetric(horizontal: 25.0),
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
                 child: TextField(
+                  controller: usuarioController,
                   obscureText: false,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     enabledBorder: OutlineInputBorder(
                       borderSide:
                           BorderSide(color: Color.fromRGBO(255, 255, 255, 1)),
@@ -56,14 +58,15 @@ class Login extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
 
               Padding(
                 //Bloque de texto de contraseña
-                padding: EdgeInsets.symmetric(horizontal: 25.0),
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
                 child: TextField(
+                  controller: contrasenaController,
                   obscureText: true,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     enabledBorder: OutlineInputBorder(
                       borderSide:
                           BorderSide(color: Color.fromRGBO(255, 255, 255, 1)),
@@ -79,9 +82,9 @@ class Login extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: 2),
+              const SizedBox(height: 2),
 
-              Padding(
+              const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 25.0),
                 child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                   Text(
@@ -91,9 +94,32 @@ class Login extends StatelessWidget {
                 ]),
               ),
 
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
 
-              MiBoton(onTap: null)
+              ElevatedButton(
+                onPressed: () {
+                  String inputUser = usuarioController.text;
+                  String inputPass = contrasenaController.text;
+
+                  if (inputPass.isEmpty || inputUser.isEmpty) {
+                    print("Por favor, ingrese Usuario y/o Contraseña");
+                    const Text(
+                      'Por favor, ingrese el usuario y/o contraseña',
+                      style: TextStyle(color: Colors.red),
+                    );
+                  } else if ((inputUser == "Gabeto") &&
+                      (inputPass == "Cambitron123")) {
+                    print("Log In exitoso");
+                    context.pushNamed(Home.name, extra: inputUser);
+                  } else {
+                    print("Log In fallido");
+                  }
+                },
+                child: const Text(
+                  'Log In',
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
             ],
           ),
         ),

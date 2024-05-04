@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:log_in/paginas/login.dart';
+import 'package:log_in/router.dart';
 
 void main() {
   runApp(const MainApp());
@@ -10,9 +10,9 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp.router(
+      routerConfig: appRouter,
       debugShowCheckedModeBanner: false,
-      home: Login(),
     );
   }
 }
